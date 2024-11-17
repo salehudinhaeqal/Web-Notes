@@ -1,0 +1,180 @@
+/* Container utama untuk tabel */
+.table-container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Judul */
+.table-container h1 {
+  margin-bottom: 30px;
+  color: #333;
+  font-size: 2rem;
+}
+
+/* Formulir untuk menambah catatan (input samping) */
+.note-form {
+  display: flex;
+  justify-content: center; /* Memastikan form berada di tengah */
+  align-items: center;
+  gap: 20px; /* Jarak antar kolom input */
+  margin-bottom: 30px;
+}
+
+.form-input {
+  padding: 10px;
+  width: 250px; /* Lebar input agar lebih seimbang */
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.btn-submit {
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s; /* Menambahkan transisi untuk transform */
+  margin-top: 10px;
+  transform: translateY(-4px); /* Efek tombol naik sedikit lebih tinggi secara default */
+}
+
+.btn-submit:hover {
+  background-color: #0056b3;
+  transform: translateY(-8px); /* Naik lebih tinggi saat di-hover */
+}
+
+/* Tabel */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.styled-table thead {
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.styled-table tbody tr {
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f9f9f9;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #007bff;
+}
+
+/* Tombol Edit */
+.btn-edit {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-edit:hover {
+  background-color: #218838;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 250px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #007bff; /* Warna solid biru */
+  border-bottom: 1px solid #ccc;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  max-height: 80px; /* Mengatur ukuran maksimal logo */
+  width: auto; /* Memastikan logo tetap proporsional */
+  margin-right: 10px;
+}
+
+.site-name {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff; /* Warna teks putih */
+}
+
+/* Search Bar */
+.search-bar {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end; /* Memastikan search bar berada di sebelah kanan */
+  align-items: center;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 350px; /* Membatasi lebar maksimal agar lebih responsif */
+  padding: 10px 15px;
+  border: 2px solid #007bff; /* Border lebih tebal dan warna sesuai navbar */
+  border-radius: 25px; /* Membuat sudut input lebih melengkung */
+  outline: none;
+  font-size: 16px;
+  transition: all 0.3s ease; /* Transisi halus saat hover atau focus */
+}
+
+.search-input::placeholder {
+  color: #999; /* Warna teks placeholder */
+}
+
+.search-input:focus {
+  border-color: #0056b3; /* Mengubah border color saat fokus */
+  box-shadow: 0 0 5px rgba(0, 91, 255, 0.4); /* Efek shadow saat fokus */
+}
+
+/* Tambahkan efek hover */
+.search-input:hover {
+  border-color: #0056b3; /* Efek border color saat hover */
+}
+

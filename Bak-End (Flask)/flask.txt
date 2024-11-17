@@ -1,0 +1,82 @@
+from flask import Flask, request, jsonify
+import mysql.connector
+import logging
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
+logging.basicConfig(level=logging.ERROR)
+
+# Endpoint GET untuk mengambil semua catatan
+@app.route('/api/notes', methods=['GET'])
+def get_notes():
+    try:
+        conn = mysql.connector.connect(user='root', password='password', host='127.0.0.1', database='notes')
+        cursor = conn.cursor(dictionary=True)
+        sql = 'SELECT * FROM notes'
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        return jsonify(result)
+    except Exception as e:
+        logging.error(f"Error fetching data: {e}")
+        return jsonify({'error': 'Tidak dapat mengambil data catatan'}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
+# Endpoint POST untuk menambahkan catatan baru
+@app.route('/api/notes', methods=['POST'])
+def add_note():
+    try:
+        nama_kelas = request.json['nama_kelas']
+        tugas = request.json['tugas']
+        isChecked = request.json.get('isChecked', False)  # Default False jika tidak disediakan
+
+        conn = mysql.connector.connect(user='root', password='password', host='127.0.0.1', database='notes')
+        cursor = conn.cursor()
+
+        insert_stmt = "INSERT INTO notes (nama_kelas, tugas, isChecked) VALUES (%s, %s, %s)"
+        data = (nama_kelas, tugas, isChecked)
+
+        cursor.execute(insert_stmt, data)
+        conn.commit()
+
+        task = {'nama_kelas': nama_kelas, 'tugas': tugas, 'isChecked': isChecked}
+        return jsonify(task), 201
+    except Exception as e:
+        logging.error(f"Error inserting data: {e}")
+        conn.rollback()
+        return jsonify({'error': 'Data tidak dapat ditambahkan'}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
+# Endpoint PUT untuk memperbarui catatan
+@app.route('/api/notes/<int:id>', methods=['PUT'])
+def update_note(id):
+    try:
+        nama_kelas = request.json['nama_kelas']
+        tugas = request.json['tugas']
+        isChecked = request.json['isChecked']
+
+        conn = mysql.connector.connect(user='root', password='password', host='127.0.0.1', database='notes')
+        cursor = conn.cursor()
+
+        update_stmt = "UPDATE notes SET nama_kelas=%s, tugas=%s, isChecked=%s WHERE id=%s"
+        data = (nama_kelas, tugas, isChecked, id)
+
+        cursor.execute(update_stmt, data)
+        conn.commit()
+
+        task = {'id': id, 'nama_kelas': nama_kelas, 'tugas': tugas, 'isChecked': isChecked}
+        return jsonify(task), 200
+    except Exception as e:
+        logging.error(f"Error updating data: {e}")
+        conn.rollback()
+        return jsonify({'error': 'Data tidak dapat diperbarui'}), 500
+    finally:
+        cursor.close()
+        conn.close()
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=8000)
